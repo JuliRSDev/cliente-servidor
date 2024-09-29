@@ -1,3 +1,4 @@
+
 // Importamos los módulos necesarios
 const http = require('http');  // Módulo para crear el servidor HTTP
 const fs = require('fs');      // Módulo para leer archivos del sistema
