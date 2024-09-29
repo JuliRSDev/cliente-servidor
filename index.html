@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente-Servidor Ejemplo</title>
+</head>
+<body>
+    <h1>Arquitectura Cliente-Servidor</h1>
+    <!-- Botón para solicitar el mensaje al servidor -->
+    <button id="obtenerMensaje">Obtener mensaje del servidor</button>
+    <!-- Párrafo donde se mostrará el mensaje recibido -->
+    <p id="mensaje"></p>
+
+    <script>
+        // Esperamos a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtenemos referencias a los elementos del DOM
+            const boton = document.getElementById('obtenerMensaje');
+            const mensajeElement = document.getElementById('mensaje');
+
+            // Añadimos un event listener al botón
+            boton.addEventListener('click', () => {
+                // Hacemos una petición fetch al servidor
+                fetch('/api/mensaje')
+                    .then(response => response.json())  // Parseamos la respuesta como JSON
+                    .then(data => {
+                        // Actualizamos el contenido del párrafo con el mensaje recibido
+                        mensajeElement.textContent = data.mensaje;
+                    })
+                    .catch(error => {
+                        // En caso de error, lo mostramos en la consola y en la página
+                        console.error('Error:', error);
+                        mensajeElement.textContent = 'Error al obtener el mensaje';
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
